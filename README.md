@@ -9,18 +9,21 @@ Requirements
 ------------
 
 Create a service account and bind it to the cluster-admin cluster role.
+
 `
 oc create sa role_addnamespace -n project_name
 oc adm policy add-cluster-role-to-user cluster-admin -z role_addnamespace -n project_name 
 `
 
 Query the service account for its token.
+
 `
 oc describe sa role_addnamespace -n project_name
 oc describe secret <role_addnamspace_token>
 `
 
 Now create the kube config and deploy it to the role to be deployed.
+
 `
 oc login --token <token_obtained_prior> https://master-api-url.domain.com:PORT --config /tmp/config-nonprod 
 mv /tmp/config-nonprod role_add_namespace/files/env_nonprod
