@@ -28,7 +28,7 @@ Now create the kube config and deploy it to the role to be deployed.
 oc login --token <token_obtained_prior> https://master-api-url.domain.com:PORT --config /tmp/config-nonprod 
 mv /tmp/config-nonprod role_add_namespace/files/env_nonprod
 ansible-vault encrypt --ask-vault-pass role_add_namespace/files/env_nonprod 
-``
+`
 
 Role Variables
 --------------
