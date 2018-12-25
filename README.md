@@ -25,7 +25,7 @@ oc describe sa role_addnamespace -n project_name
 `
 
 `
-oc describe secret <role_addnamspace_token>
+oc describe secret <role_addnamespace_token>
 `
 
 Now create the kube config and deploy it to the role to be deployed.
