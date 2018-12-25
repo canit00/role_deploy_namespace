@@ -1,0 +1,3 @@
+---
+# defaults file for role_deploy_namespace
+config: "{{ ('env_' + ansible_local.cluster.env.is) }}"

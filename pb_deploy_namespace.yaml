@@ -1,0 +1,27 @@
+---
+# Ansible role to create new namespaces in OpenShift
+# Right now known to work on Ansible version 2.4.x
+# Example: ansible-playbook -v -l <hostname> pb_deploy_namespace.yaml --ask-vault-pass
+# To only set limits (skip entering a project description): ansible-playbook -v pb_deploy_namespace.yaml --ask-vault-pass -t limit
+- hosts: all
+  gather_facts: yes
+
+  vars_prompt:
+    - name: project_name
+      prompt: "Enter project name; e.g: omms-pe-stage"
+      private: no
+
+    - name: project_description
+      prompt: "Enter project description; e.g: OMMS Stage Project"
+      private: no
+
+    - name: mem
+      prompt: "Enter # of memory in Gigs; e.g: 2"
+      private: no
+
+    - name: cpu
+      prompt: "Enter # of CPUs; e.g: 4"
+      private: no
+ 
+  roles:
+  - { role: role_deploy_namespace }

@@ -1,0 +1,6 @@
+---
+# handlers file for role_deploy_namespace
+- name: cleanup
+  file:
+    path: "/tmp/{{ config }}"
+    state: absent

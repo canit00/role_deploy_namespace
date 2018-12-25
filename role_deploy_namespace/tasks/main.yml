@@ -1,0 +1,86 @@
+---
+# tasks file for role_deploy_namespace
+- name: create config
+  copy:
+    dest: "/tmp/{{ config }}"
+    src: "{{ config }}"
+    decrypt: yes
+  tags:
+  - limit
+
+- name: Create Project
+  command: >
+    oc new-project "{{ project_name }}" --display-name="{{ project_name }}" --description="{{ project_description }}" --config /tmp/"{{ config }}"
+  register: pro
+  failed_when: "pro.rc != 0 and pro.rc != 1"
+
+- name: Set Quota File
+  template:
+    src: resource_quota.yaml.j2
+    dest: /tmp/resource_quota.yaml
+    backup: yes
+    owner: root
+    group: root
+    mode: 0600
+  tags:
+  - limit
+
+- name: Set Limits File
+  template:
+    src: resource_limits.yaml.j2
+    dest: /tmp/resource_limits.yaml
+    backup: yes
+    owner: root
+    group: root
+    mode: 0600
+  tags:
+  - limit
+
+- name: set project quota
+  command: >
+    oc create -f /tmp/resource_quota.yaml -n "{{ project_name }}" --config /tmp/"{{ config }}"
+  tags:
+  - limit
+
+- name: set project limits
+  command: >
+    oc create -f /tmp/resource_limits.yaml -n "{{ project_name }}" --config /tmp/"{{ config }}"
+  tags:
+  - limit
+
+- name: verify limits
+  command: >
+    oc get limits -n "{{ project_name }}" --config /tmp/"{{ config }}"
+  register: limits
+  tags:
+  - limit
+
+- name: verify quota
+  command: >
+    oc get limits -n "{{ project_name }}" --config /tmp/"{{ config }}"
+  register: quota
+  tags:
+  - limit
+
+- fail:
+    msg: "No quota found - check limits too"
+  when: quota.stdout.find("No resources found") != -1
+  tags:
+  - limit
+
+- fail:
+    msg: "No limits found"
+  when: limits.stdout.find("No resources found") != -1
+  tags:
+  - limit
+
+- name: cleanup
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+  - "/tmp/{{ config }}"
+  - "/tmp/resource_limits.yaml"
+  - "/tmp/resource_quota.yaml"
+  tags:
+  - limit
