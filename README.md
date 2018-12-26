@@ -52,6 +52,12 @@ Dependencies
 
 This role depends on ansible_local facts and should be set prior to running role.
 
+    $ cat /etc/ansible/facts.d/cluster.fact
+    # BEGIN ANSIBLE MANAGED BLOCK
+    [env]
+    is=nonprod
+    node=master
+    # END ANSIBLE MANAGED BLOCK
 
 Example Playbook
 ----------------
