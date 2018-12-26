@@ -5,6 +5,8 @@ Ansible role to create new namespaces. Mainly written to run on OCP via Ansible 
 
 Will rewrite role for Ansible >= 2.7.x to utilize the k8s module.
 
+Plus, the oc command line tool is neat.
+
 Requirements
 ------------
 
