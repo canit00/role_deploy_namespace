@@ -47,7 +47,7 @@ ansible-vault encrypt --ask-vault-pass role_deploy_namespace/files/env_nonprod
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+N/A
 
 Dependencies
 ------------
@@ -64,8 +64,15 @@ This role depends on ansible_local facts and should be set prior to running role
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+To deploy the playbook run the following:
+```
+ansible-playbook -v -l <hostname> pb_deploy_namespace.yaml --ask-vault-pass
+```
 
+If you only want to set or modify an existing limits skipe entering a project description when prompt.
+```
+ansible-playbook -v pb_deploy_namespace.yaml --ask-vault-pass -t limit
+```
     ---
     # Ansible role to create new namespaces in OpenShift
     # Right now known to work on Ansible version 2.4.x
