@@ -69,7 +69,7 @@ To deploy the playbook run the following:
 ansible-playbook -v -l <hostname> pb_deploy_namespace.yaml --ask-vault-pass
 ```
 
-If you only want to set or modify an existing limits skipe entering a project description when prompt.
+If you only want to set or modify an existing limits skip entering a project description when prompt.
 ```
 ansible-playbook -v pb_deploy_namespace.yaml --ask-vault-pass -t limit
 ```
