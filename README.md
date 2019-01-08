@@ -1,4 +1,4 @@
-Role Name
+Role Deploy Namespace
 =========
 
 Ansible role to create new namespaces. Mainly written to run on OCP via Ansible <= 2.4.x
