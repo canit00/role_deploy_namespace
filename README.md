@@ -52,7 +52,7 @@ N/A
 Dependencies
 ------------
 
-This role depends on ansible_local facts and should be set prior to running role.
+This role depends on ansible_local facts and should be set prior to running role. [Example.](https://github.com/canit00/openshift/blob/master/2018/ansible/playbooks/pb_set_cluster_facts.yaml)
 
     $ cat /etc/ansible/facts.d/cluster.fact
     # BEGIN ANSIBLE MANAGED BLOCK
