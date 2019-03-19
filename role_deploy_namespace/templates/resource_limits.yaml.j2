@@ -25,4 +25,4 @@ spec:
         cpu: "200m"
         memory: "200Mi"
       maxLimitRequestRatio:
-        cpu: "{{ 200 // cpu|int }}"
+        cpu: "{{ 200|int // cpu|int }}"
